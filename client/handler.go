@@ -1,12 +1,13 @@
 package client
 
 import (
-	"github.com/Akegarasu/blivedm-go/message"
-	"github.com/Akegarasu/blivedm-go/packet"
-	"github.com/Akegarasu/blivedm-go/utils"
-	log "github.com/sirupsen/logrus"
 	"runtime/debug"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
+	"github.com/youngkzz/blivedm-go/message"
+	"github.com/youngkzz/blivedm-go/packet"
+	"github.com/youngkzz/blivedm-go/utils"
 )
 
 var (

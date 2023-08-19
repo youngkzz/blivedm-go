@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Akegarasu/blivedm-go/api"
-	"github.com/Akegarasu/blivedm-go/packet"
 	"github.com/gorilla/websocket"
 	log "github.com/sirupsen/logrus"
+	"github.com/youngkzz/blivedm-go/api"
+	"github.com/youngkzz/blivedm-go/packet"
 )
 
 var retryCount = 0

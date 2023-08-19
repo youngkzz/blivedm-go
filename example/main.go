@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
-	"github.com/Akegarasu/blivedm-go/api"
-	"github.com/Akegarasu/blivedm-go/client"
-	"github.com/Akegarasu/blivedm-go/message"
-	_ "github.com/Akegarasu/blivedm-go/utils"
 	log "github.com/sirupsen/logrus"
 	"github.com/tidwall/gjson"
+	"github.com/youngkzz/blivedm-go/api"
+	"github.com/youngkzz/blivedm-go/client"
+	"github.com/youngkzz/blivedm-go/message"
+	_ "github.com/youngkzz/blivedm-go/utils"
 )
 
 func main() {

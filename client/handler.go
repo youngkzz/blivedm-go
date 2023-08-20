@@ -1,6 +1,7 @@
 package client
 
 import (
+	"encoding/binary"
 	"runtime/debug"
 	"strings"
 
@@ -22,6 +23,7 @@ type eventHandlers struct {
 	guardBuyHandlers       []func(*message.GuardBuy)
 	liveHandlers           []func(*message.Live)
 	userToastHandlers      []func(*message.UserToast)
+	heartBeatHandlers      []func(uint32)
 }
 
 type customEventHandlers map[string]func(s string)
@@ -68,6 +70,10 @@ func (c *Client) OnLive(f func(*message.Live)) {
 // OnUserToast 添加 UserToast 的处理器
 func (c *Client) OnUserToast(f func(*message.UserToast)) {
 	c.eventHandlers.userToastHandlers = append(c.eventHandlers.userToastHandlers, f)
+}
+
+func (c *Client) OnPopularity(f func(uint32)) {
+	c.eventHandlers.heartBeatHandlers = append(c.eventHandlers.heartBeatHandlers, f)
 }
 
 // Handle 处理一个包
@@ -130,6 +136,10 @@ func (c *Client) Handle(p packet.Packet) {
 			log.Debugf("unknown cmd(%s), body: %s", cmd, p.Body)
 		}
 	case packet.HeartBeatResponse:
+		v := binary.BigEndian.Uint32(p.Body)
+		for _, fn := range c.eventHandlers.heartBeatHandlers {
+			go cover(func() { fn(v) })
+		}
 	case packet.RoomEnterResponse:
 	default:
 		log.WithField("protover", p.ProtocolVersion).

@@ -2,6 +2,7 @@ package packet
 
 import (
 	"encoding/json"
+
 	log "github.com/sirupsen/logrus"
 )
 
@@ -17,7 +18,7 @@ type Enter struct {
 
 // NewEnterPacket 构造进入房间的包
 // uid 可以为 0, key 在使用 broadcastlv 服务器的时候不需要
-func NewEnterPacket(uid int, roomID int, key string) []byte {
+func NewEnterPacket(uid int, roomID int, key, buvid string) []byte {
 	ent := &Enter{
 		UID:      uid,
 		RoomID:   roomID,
@@ -25,6 +26,7 @@ func NewEnterPacket(uid int, roomID int, key string) []byte {
 		Platform: "web",
 		Type:     2,
 		Key:      key,
+		Buvid:    buvid,
 	}
 	m, err := json.Marshal(ent)
 	if err != nil {

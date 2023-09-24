@@ -13,7 +13,7 @@ import (
 
 func main() {
 	log.SetLevel(log.DebugLevel)
-	c := client.NewClient("23555200", "194484313")
+	c := client.NewClient("30692013", "3546381790743151")
 	c.UseDefaultHost()
 	//弹幕事件
 	c.OnDanmaku(func(danmaku *message.Danmaku) {

@@ -28,6 +28,7 @@ type Client struct {
 	customEventHandlers *customEventHandlers
 	cancel              context.CancelFunc
 	done                <-chan struct{}
+	buvid               string
 }
 
 // NewClient 创建一个新的弹幕 client
@@ -66,6 +67,7 @@ func (c *Client) init() error {
 			}
 		}
 		c.token = info.Data.Token
+		c.buvid = info.Data.Buvid
 	}
 	return nil
 }
@@ -168,7 +170,7 @@ func (c *Client) sendEnterPacket() error {
 	if err != nil {
 		return errors.New("error roomID")
 	}
-	pkt := packet.NewEnterPacket(uid, rid, c.token)
+	pkt := packet.NewEnterPacket(uid, rid, c.token, c.buvid)
 	if err = c.conn.WriteMessage(websocket.BinaryMessage, pkt); err != nil {
 		return err
 	}

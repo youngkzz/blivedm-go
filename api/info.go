@@ -44,6 +44,7 @@ type DanmuInfo struct {
 		RefreshRate      int     `json:"refresh_rate"`
 		MaxDelay         int     `json:"max_delay"`
 		Token            string  `json:"token"`
+		Buvid            string  `json:"buvid"`
 		HostList         []struct {
 			Host    string `json:"host"`
 			Port    int    `json:"port"`
@@ -55,7 +56,8 @@ type DanmuInfo struct {
 
 func GetDanmuInfo(roomID string) (*DanmuInfo, error) {
 	result := &DanmuInfo{}
-	err := GetJson(fmt.Sprintf("https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id=%s&type=0", roomID), result)
+	//err := GetJson(fmt.Sprintf("https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id=%s&type=0", roomID), result)
+	err := GetJson(fmt.Sprintf("https://workers.meta48.live/api/bilibili/room-conn-info/%s?builtInAuth=1", roomID), result)
 	if err != nil {
 		return nil, err
 	}
